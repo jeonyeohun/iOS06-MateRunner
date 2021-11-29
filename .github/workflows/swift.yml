@@ -30,7 +30,7 @@ jobs:
     - name: CocoaPod Install
       run: |
         cd MateRunner
-        pod clean install
+        pod install
     - name: Build
       run: |
           echo "$FCM_KEY" >> /Users/runner/work/iOS06-MateRunner/iOS06-MateRunner/MateRunner/MateRunner/Resource/Debug.xcconfig
