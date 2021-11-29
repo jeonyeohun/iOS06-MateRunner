@@ -28,7 +28,7 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-pods-
     - name: CocoaPod Install
-      run: pod install --repo-update --clean-install --project-directory=MateRunner
+      run: pod install --project-directory=MateRunner
     - name: Build
       run: |
           echo "$FCM_KEY" >> /Users/runner/work/iOS06-MateRunner/iOS06-MateRunner/MateRunner/MateRunner/Resource/Debug.xcconfig
