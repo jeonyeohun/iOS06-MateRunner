@@ -45,7 +45,7 @@ jobs:
       uses: actions/checkout@v1
     - name: Run ViewModel unit tests
       run: |
-        set -o pipefail && xcodebuild test -workspace MateRunner.xcworkspace -scheme MateRunner -destination 'platform=iOS Simulator,name=iPhone 11 Pro,OS=14.4'
+        set -o pipefail && xcodebuild -workspace MateRunner/MateRunner.xcworkspace -scheme $SCHEME -sdk iphonesimulator -destination ‘platform=iOS Simulator,name=<your_simulator>,OS=10.2’ test-without-building -only-testing:$VIEW_MODEL_UNIT_TEST_TARGET
     - name: Upload test logs
       uses: actions/upload-artifact@v1
       with:
@@ -54,7 +54,7 @@ jobs:
     
     - name: Run UseCase unit tests
       run: |
-        set -o pipefail && xcodebuild test -workspace MateRunner.xcworkspace -scheme MateRunner -destination 'platform=iOS Simulator,name=iPhone 11 Pro,OS=14.4'
+        set -o pipefail && xcodebuild -workspace MateRunner/MateRunner.xcworkspace -scheme $SCHEME -sdk iphonesimulator -destination ‘platform=iOS Simulator,name=<your_simulator>,OS=10.2’ test-without-building -only-testing:$USE_CASE_UNIT_TEST_TARGET
     - name: Upload test logs
       uses: actions/upload-artifact@v1
       with:
