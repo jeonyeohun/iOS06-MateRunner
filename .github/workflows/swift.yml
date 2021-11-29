@@ -29,8 +29,8 @@ jobs:
     - name: Build application
       run: |
         echo "$FCM_KEY" >> /Users/runner/work/iOS06-MateRunner/iOS06-MateRunner/MateRunner/MateRunner/Resource/Debug.xcconfig
-        pod install --repo-update --clean-install --project-directory=MateRunner/MateRunner
-        set -o pipefail && xcodebuild clean -scheme $SCHEME -destination "platform=iOS Simulator,name=$DEVICE" -derivedDataPath $DERIVED_DATA_PATH build-for-testing | xcpretty --color --simple
+        pod install --repo-update --clean-install --project-directory=MateRunner
+        set -o pipefail && xcodebuild -workspace MateRunner/MateRunner.xcworkspace clean -scheme $SCHEME -destination "platform=iOS Simulator,name=$DEVICE" -derivedDataPath $DERIVED_DATA_PATH build-for-testing | xcpretty --color --simple
 
   unit_test:
     name: ViewModel Unit test
