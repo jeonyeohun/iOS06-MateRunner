@@ -31,6 +31,7 @@ jobs:
       run: |
         cd MateRunner
         pod repo update
+        pod deintegrate
         pod update
         pod install
     - name: Build
