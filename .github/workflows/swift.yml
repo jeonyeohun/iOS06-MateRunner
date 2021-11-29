@@ -31,4 +31,4 @@ jobs:
       run: |
         echo "$FCM_KEY" >> /Users/runner/work/iOS06-MateRunner/iOS06-MateRunner/MateRunner/MateRunner/Resource/Debug.xcconfig
         pod install --repo-update --clean-install --project-directory=MateRunner
-        xcodebuild -workspace MateRunner/MateRunner.xcworkspace clean test -scheme $SCHEME -destination "platform=iOS Simulator,name=$DEVICE" -derivedDataPath $DERIVED_DATA_PATH | xcpretty --color --simple
+        xcodebuild test -workspace MateRunner/MateRunner.xcworkspace -scheme $SCHEME -destination "platform=iOS Simulator,name=$DEVICE" | xcpretty --color --simple
