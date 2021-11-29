@@ -17,19 +17,19 @@ on:
     - test/*
  
 jobs:
-  build:
-    name: Build
-    env:
-      SCHEME: "MateRunner"
-      DEVICE: "iPhone 11"
-      DERIVED_DATA_PATH: "DerivedData"
-    runs-on: macOS-latest
+  buildAndTest:
+    runs-on: macos-latest
     steps:
-    - name: Checkout project
-      uses: actions/checkout@v1
-    - name: Build application
-      run: |
-        echo "$FCM_KEY" >> /Users/runner/work/iOS06-MateRunner/iOS06-MateRunner/MateRunner/MateRunner/Resource/Debug.xcconfig
-        echo "$FCM_KEY" >> /Users/runner/work/iOS06-MateRunner/iOS06-MateRunner/MateRunner/MateRunner/Resource/Release.xcconfig
-        pod install --repo-update --clean-install --project-directory=MateRunner
-        xcodebuild test -workspace MateRunner/MateRunner.xcworkspace -scheme $SCHEME -destination "platform=iOS Simulator,name=$DEVICE" | xcpretty --color --simple
+    - uses: actions/checkout@v2
+    - uses: actions/cache@v2
+      with:
+        path: Pods
+        key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-pods-
+    - name: CocoaPod Install
+      run: pod install
+    - name: Build
+      run: xcodebuild -workspace MateRunner.xcworkspace -scheme MateRunner -configuration Release -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 12'
+    - name: Test
+      run: xcodebuild -workspace MateRunner.xcworkspace -scheme MateRunner -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 12' test
