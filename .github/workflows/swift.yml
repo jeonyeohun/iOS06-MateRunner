@@ -23,13 +23,15 @@ jobs:
     - uses: actions/checkout@v2
     - uses: actions/cache@v2
       with:
-        path: iOS06-MateRunner/MateRunner/Pods
+        path: /Users/runner/work/iOS06-MateRunner/iOS06-MateRunner/MateRunner/Pods
         key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
         restore-keys: |
           ${{ runner.os }}-pods-
     - name: CocoaPod Install
       run: pod install
     - name: Build
-      run: xcodebuild -workspace MateRunner/MateRunner.xcworkspace -scheme MateRunner -configuration Release -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 12'
+      run: |
+          echo "$FCM_KEY" >> /Users/runner/work/iOS06-MateRunner/iOS06-MateRunner/MateRunner/MateRunner/Resource/Debug.xcconfig
+          xcodebuild -workspace MateRunner/MateRunner.xcworkspace -scheme MateRunner -configuration Release -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 12'
     - name: Test
       run: xcodebuild -workspace MateRunner/MateRunner.xcworkspace -scheme MateRunner -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 12' test
