@@ -29,6 +29,7 @@ jobs:
           ${{ runner.os }}-pods-
     - name: CocoaPod Install
       run: |
+        pod repo update --project-directory=MateRunner
         pod update --project-directory=MateRunner
         pod install --project-directory=MateRunner
     - name: Build
