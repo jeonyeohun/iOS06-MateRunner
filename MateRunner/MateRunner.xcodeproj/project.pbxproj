@@ -2059,11 +2059,9 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-MateRunner/Pods-MateRunner-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-MateRunner/Pods-MateRunner-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -2495,7 +2493,7 @@
 		};
 		5E918A1E272BD76F00B57888 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3D62255627495A1500E4A327 /* Debug.xcconfig */;
+			baseConfigurationReference = 5119C93FFC2EE8EB62045BE0 /* Pods-MateRunner.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
