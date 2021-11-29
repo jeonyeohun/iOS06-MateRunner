@@ -30,5 +30,6 @@ jobs:
     - name: Build application
       run: |
         echo "$FCM_KEY" >> /Users/runner/work/iOS06-MateRunner/iOS06-MateRunner/MateRunner/MateRunner/Resource/Debug.xcconfig
+        echo "$FCM_KEY" >> /Users/runner/work/iOS06-MateRunner/iOS06-MateRunner/MateRunner/MateRunner/Resource/Release.xcconfig
         pod install --repo-update --clean-install --project-directory=MateRunner
         xcodebuild test -workspace MateRunner/MateRunner.xcworkspace -scheme $SCHEME -destination "platform=iOS Simulator,name=$DEVICE" | xcpretty --color --simple
