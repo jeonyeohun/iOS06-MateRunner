@@ -31,34 +31,4 @@ jobs:
       run: |
         echo "$FCM_KEY" >> /Users/runner/work/iOS06-MateRunner/iOS06-MateRunner/MateRunner/MateRunner/Resource/Debug.xcconfig
         pod install --repo-update --clean-install --project-directory=MateRunner
-        set -o pipefail && xcodebuild -workspace MateRunner/MateRunner.xcworkspace clean -scheme $SCHEME -destination "platform=iOS Simulator,name=$DEVICE" -derivedDataPath $DERIVED_DATA_PATH build-for-testing | xcpretty --color --simple
-
-  unit_test:
-    name: Unit test
-    env:
-      DEVICE: "iPhone 11"
-      VIEW_MODEL_UNIT_TEST_TARGET: "MateRunnerViewModelTests"
-      USE_CASE_UNIT_TEST_TARGET: "MateRunnerUseCaseTests"
-      DERIVED_DATA_PATH: "DerivedData"
-    runs-on: macOS-latest
-    needs: build
-    steps:
-    - name: Checkout project
-      uses: actions/checkout@v1
-    - name: Run ViewModel unit tests
-      run: |
-        set -o pipefail && xcodebuild test-without-building -xctestrun $(find . -type f -name "*.xctestrun") -destination "platform=iOS Simulator,name=$DEVICE" -derivedDataPath $DERIVED_DATA_PATH -enableCodeCoverage YES -only-testing:$VIEW_MODEL_UNIT_TEST_TARGET | xcpretty --color --simple
-    - name: Upload test logs
-      uses: actions/upload-artifact@v1
-      with:
-        name: ViewModelTestLogs
-        path: DerivedData/Logs/ViewModelTest
-    
-    - name: Run UseCase unit tests
-      run: |
-        set -o pipefail && xcodebuild test-without-building -xctestrun $(find . -type f -name "*.xctestrun") -destination "platform=iOS Simulator,name=$DEVICE" -derivedDataPath $DERIVED_DATA_PATH -enableCodeCoverage YES -only-testing:$USE_CASE_UNIT_TEST_TARGET | xcpretty --color --simple
-    - name: Upload test logs
-      uses: actions/upload-artifact@v1
-      with:
-        name: UseCaseTestLogs
-        path: DerivedData/Logs/UseCaseTest
+        xcodebuild -workspace MateRunner/MateRunner.xcworkspace clean test -scheme $SCHEME -destination "platform=iOS Simulator,name=$DEVICE" -derivedDataPath $DERIVED_DATA_PATH | xcpretty --color --simple
