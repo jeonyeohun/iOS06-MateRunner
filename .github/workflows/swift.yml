@@ -35,6 +35,6 @@ jobs:
       run: |
           echo "$FCM_KEY" >> /Users/runner/work/iOS06-MateRunner/iOS06-MateRunner/MateRunner/MateRunner/Resource/Debug.xcconfig
           echo "$FCM_KEY" >> /Users/runner/work/iOS06-MateRunner/iOS06-MateRunner/MateRunner/MateRunner/Resource/Release.xcconfig
-          xcodebuild -workspace MateRunner/MateRunner.xcworkspace -scheme MateRunner -configuration Release -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 12'
+          xcodebuild -workspace MateRunner/MateRunner.xcworkspace -scheme MateRunner -configuration Debug -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 12'
     - name: Test
       run: xcodebuild -workspace MateRunner/MateRunner.xcworkspace -scheme MateRunner -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 12' test
